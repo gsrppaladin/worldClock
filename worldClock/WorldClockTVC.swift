@@ -9,15 +9,13 @@
 import UIKit
 
 
-
-
-class WorldClockTVC: UITableViewCell {
+class WorldClockTVC: UITableViewCell{
 
     @IBOutlet var timeZoneName: UILabel!
     
     @IBOutlet var timeLabel: UILabel!
     
-       
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -58,4 +56,8 @@ class WorldClockTVC: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    
+    
+    
 }

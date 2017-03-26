@@ -8,13 +8,16 @@
 
 import UIKit
 
-class WorldClockVC: UITableViewController {
+class WorldClockVC: UITableViewController, WorldClockProtocol {
 
     
-    var timeZonesToDisplay: [String] = ["GMT", "Europe/Paris", "Asia/Dubai", "Europe/Dublin", "America/New York"]
+    var timeZonesToDisplay: [String] = []
     
     
-    
+    func addTimeZone(timeZone: String) {
+        timeZonesToDisplay.append(timeZone)
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,14 +97,18 @@ class WorldClockVC: UITableViewController {
     }
    
 
-    /*
+   
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+      
+        
+        if segue.identifier == "moduleViewSegue" {
+            let destination = segue.destination as! TimeZonesVC
+            destination.delegate = self
+        }
     }
-    */
+   
 
 }

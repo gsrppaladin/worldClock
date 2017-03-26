@@ -73,7 +73,7 @@
                     <navigationItem key="navigationItem" title="World Clock" id="EkA-7w-iqG">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1MQ-ID-i53">
                             <connections>
-                                <segue destination="wUm-Qr-qhF" kind="presentation" id="jue-t0-0qW"/>
+                                <segue destination="wUm-Qr-qhF" kind="presentation" identifier="moduleViewSegue" id="jue-t0-0qW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

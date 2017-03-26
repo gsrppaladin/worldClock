@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 protocol WorldClockProtocol {
     func addTimeZone(timeZone: String)
 }
@@ -18,6 +19,7 @@ class TimeZonesVC: UITableViewController, UISearchBarDelegate {
     
     
     @IBOutlet var searchTxt: UISearchBar!
+    
     var delegate: WorldClockProtocol?
   
     
@@ -63,6 +65,10 @@ class TimeZonesVC: UITableViewController, UISearchBarDelegate {
   
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedTimeZone: String = timeZones[indexPath.row]
+        delegate?.addTimeZone(timeZone: selectedTimeZone)
+        
         self.dismiss(animated: true, completion: nil)
         //only be controlled by the module viewController.
         
