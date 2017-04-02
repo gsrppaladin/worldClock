@@ -14,6 +14,9 @@
 		FE37B3A01E7F575400BB0381 /* WorldClockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE37B39F1E7F575400BB0381 /* WorldClockVC.swift */; };
 		FE37B3A21E7F579000BB0381 /* TimeZonesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE37B3A11E7F579000BB0381 /* TimeZonesVC.swift */; };
 		FE37B3A41E7F583500BB0381 /* WorldClockTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE37B3A31E7F583500BB0381 /* WorldClockTVC.swift */; };
+		FE7768201E91A98600157A21 /* alarmTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE77681F1E91A98600157A21 /* alarmTVC.swift */; };
+		FE7768221E91A9A100157A21 /* addAlarmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7768211E91A9A100157A21 /* addAlarmVC.swift */; };
+		FE7768241E91A9BC00157A21 /* addAlarmTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7768231E91A9BC00157A21 /* addAlarmTVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		FE37B39F1E7F575400BB0381 /* WorldClockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockVC.swift; sourceTree = "<group>"; };
 		FE37B3A11E7F579000BB0381 /* TimeZonesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZonesVC.swift; sourceTree = "<group>"; };
 		FE37B3A31E7F583500BB0381 /* WorldClockTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockTVC.swift; sourceTree = "<group>"; };
+		FE77681F1E91A98600157A21 /* alarmTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alarmTVC.swift; sourceTree = "<group>"; };
+		FE7768211E91A9A100157A21 /* addAlarmVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addAlarmVC.swift; sourceTree = "<group>"; };
+		FE7768231E91A9BC00157A21 /* addAlarmTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addAlarmTVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,7 @@
 		FE37B3891E7F50D300BB0381 /* worldClock */ = {
 			isa = PBXGroup;
 			children = (
+				FE77681E1E91A94C00157A21 /* Alarm */,
 				FE37B39E1E7F572D00BB0381 /* World Clock */,
 				FE37B38A1E7F50D300BB0381 /* AppDelegate.swift */,
 				FE37B3901E7F50D300BB0381 /* Main.storyboard */,
@@ -76,6 +83,16 @@
 				FE37B3A31E7F583500BB0381 /* WorldClockTVC.swift */,
 			);
 			name = "World Clock";
+			sourceTree = "<group>";
+		};
+		FE77681E1E91A94C00157A21 /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				FE77681F1E91A98600157A21 /* alarmTVC.swift */,
+				FE7768211E91A9A100157A21 /* addAlarmVC.swift */,
+				FE7768231E91A9BC00157A21 /* addAlarmTVCell.swift */,
+			);
+			name = Alarm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,9 +168,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE7768221E91A9A100157A21 /* addAlarmVC.swift in Sources */,
 				FE37B3A21E7F579000BB0381 /* TimeZonesVC.swift in Sources */,
 				FE37B3A01E7F575400BB0381 /* WorldClockVC.swift in Sources */,
 				FE37B38B1E7F50D300BB0381 /* AppDelegate.swift in Sources */,
+				FE7768241E91A9BC00157A21 /* addAlarmTVCell.swift in Sources */,
+				FE7768201E91A98600157A21 /* alarmTVC.swift in Sources */,
 				FE37B3A41E7F583500BB0381 /* WorldClockTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +338,7 @@
 				FE37B39D1E7F50D300BB0381 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
