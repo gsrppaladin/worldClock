@@ -17,6 +17,7 @@ class WorldClockVC: UITableViewController, WorldClockProtocol {
     func addTimeZone(timeZone: String) {
         timeZonesToDisplay.append(timeZone)
         tableView.reloadData()
+        setUserDefaults()
     }
     
     override func viewDidLoad() {
@@ -25,7 +26,9 @@ class WorldClockVC: UITableViewController, WorldClockProtocol {
       self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
 
-
+    override func viewWillAppear(_ animated: Bool) {
+        timeZonesToDisplay = getUserDefaults()
+    }
 
     // MARK: - Table view data source
 
@@ -69,6 +72,7 @@ class WorldClockVC: UITableViewController, WorldClockProtocol {
             // Delete the row from the data source
             timeZonesToDisplay.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            setUserDefaults()
             
         }
     }
@@ -85,6 +89,7 @@ class WorldClockVC: UITableViewController, WorldClockProtocol {
         timeZonesToDisplay[to.row] = temp1
         
         tableView.reloadData()
+        setUserDefaults()
         
     }
     
@@ -111,4 +116,23 @@ class WorldClockVC: UITableViewController, WorldClockProtocol {
     }
    
 
+    //Mark: User Defaults
+    
+    
+    func setUserDefaults() {
+        UserDefaults.standard.set(timeZonesToDisplay, forKey: "WorldClocks")
+        UserDefaults.standard.synchronize()
+        
+    }
+    
+    
+    func getUserDefaults() -> [String] {
+        
+        if UserDefaults.standard.value(forKey: "WorldClocks") != nil {
+            timeZonesToDisplay = UserDefaults.standard.value(forKey: "WorldClocks") as! [String]
+        }
+        
+        return timeZonesToDisplay
+    }
+    
 }
