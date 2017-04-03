@@ -8,12 +8,20 @@
 
 import UIKit
 
+protocol UpdateSwitchValueProtocol {
+    func updateAlarmSwitch(at: Int, value: Bool)
+    
+}
+
 class addAlarmTVCell: UITableViewCell {
 
     @IBOutlet var alarmLbl: UILabel!
     
     @IBOutlet var alarmSwitch: UISwitch!
     
+    var delegate: UpdateSwitchValueProtocol?
+    
+    var cellIndex: Int!
     
     
     override func awakeFromNib() {
@@ -28,9 +36,45 @@ class addAlarmTVCell: UITableViewCell {
     }
 
     @IBAction func switchChanged(_ sender: UISwitch) {
+        
+        delegate?.updateAlarmSwitch(at: cellIndex, value: sender.isOn)
     }
     
     
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -90,6 +90,7 @@ class WorldClockVC: UITableViewController, WorldClockProtocol {
         
         tableView.reloadData()
         setUserDefaults()
+        print("\(timeZonesToDisplay)")
         
     }
     
