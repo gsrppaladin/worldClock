@@ -20,9 +20,10 @@ class addAlarmTVCell: UITableViewCell {
     @IBOutlet var alarmSwitch: UISwitch!
     
     var delegate: UpdateSwitchValueProtocol?
+    //this delegate is connected to this cell because because we are in a teableViewCell class. to set up cell we have a method in tableviewController for rowatindexpath. for each cell we are setting the delegate to self. 
+    
     
     var cellIndex: Int!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +38,10 @@ class addAlarmTVCell: UITableViewCell {
 
     @IBAction func switchChanged(_ sender: UISwitch) {
         
+        //with help of delegate we are calling this updateAlarmSwitch and passing the index and grabbing the index at rowforindexpath, 
+        //when changing the value to either true or false, but what ever the value is, pass it.
         delegate?.updateAlarmSwitch(at: cellIndex, value: sender.isOn)
+
     }
     
     

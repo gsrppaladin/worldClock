@@ -8,7 +8,7 @@
 
 import UIKit
 
-class alarmTVC: UITableViewController, AddAlarmProtocol {
+class alarmTVC: UITableViewController, AddAlarmProtocol, UpdateSwitchValueProtocol {
 
     //will need an array for store the datasource. This basically holds all the alarms that are made, like the one made in the world clock.
     
@@ -23,7 +23,6 @@ class alarmTVC: UITableViewController, AddAlarmProtocol {
         alarmArray.append(newAlarm)
         tableView.reloadData()
         
-        
         //register new notifcation here.
         //whenever adding a new alarm we are register the notifcation aswell. so that we some sound can be played when that alarm goes off.
         
@@ -32,13 +31,18 @@ class alarmTVC: UITableViewController, AddAlarmProtocol {
     
     func updateAlarm(alarmTime: Date, switchValue: Bool, index: Int) {
         let existingAlarm = alarmObject(alarmTime: alarmTime, alarmActive: switchValue)
-        alarmArray[index] = existingAlarm //should test to see if this works by commenting it out.
-        //i think this adds this to the array.
-        //this is how we update.
+        alarmArray[index] = existingAlarm
         tableView.reloadData()
     }
     
-    
+    //with the protocol updateAlarmSwitchValueProtocol it will give an error unless this function is implemented.
+    func updateAlarmSwitch(at: Int, value: Bool) {
+        
+        //
+        let updateObject: alarmObject = alarmObject(alarmTime: alarmArray[at].alarmTime, alarmActive: value)
+        alarmArray[at] = updateObject
+        
+    }
     
     
     
@@ -64,16 +68,19 @@ class alarmTVC: UITableViewController, AddAlarmProtocol {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! addAlarmTVCell
-
-        // Configure the cell...
-
         
+        // Configure the cell...
         //we have the date and we want to format that date so that it only displays the time part only. The way to do this is with a formatter.
+
         let formatter = DateFormatter()
+        
         //this is what gives it the time
         formatter.timeStyle = .short
+        
         //now we grab the alarm time and it comes from the alarm array.
         let alarmTime = alarmArray[indexPath.row].alarmTime
+        
+        
         //then we grab the time String. which we get from the alarm time.
         let timeString = formatter.string(from: alarmTime)
         
@@ -84,9 +91,11 @@ class alarmTVC: UITableViewController, AddAlarmProtocol {
         cell.alarmSwitch.isOn = alarmArray[indexPath.row].alarmActive
         
         
+        cell.cellIndex = indexPath.row
+        cell.delegate = self
+        
         return cell
     }
-    
 
     
     // Override to support conditional editing of the table view.
@@ -98,13 +107,22 @@ class alarmTVC: UITableViewController, AddAlarmProtocol {
 
     
     // Override to support editing the table view.
+    
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
             alarmArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            alarmArray.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
     
 
     /*
@@ -125,31 +143,24 @@ class alarmTVC: UITableViewController, AddAlarmProtocol {
   
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- 
-        let dVC = segue.destination as! addAlarmVC
-        dVC.delegate = self
-        
-        //this adds the new alarm to the tableView. 
+      
+        let dvc = segue.destination as! addAlarmVC
+        dvc.delegate = self
         
         if segue.identifier == "newSegue" {
+            dvc.addNew = true
+        } else if segue.identifier == "editSegue" {
+            dvc.addNew = false
             
-            dVC.addNew = true
-            
-        } else if segue.identifier == "editSeque" {
-            dVC.addNew = false
-            
-            //this grabs the index
             let index = (tableView.indexPathForSelectedRow?.row)!
             let existingAlarm = alarmArray[index]
             
-            dVC.existingAlarm = existingAlarm
-            dVC.updateIndex = index
-            
+            dvc.existingAlarm = existingAlarm
+            dvc.updateIndex = index
         }
         
-        
     }
-   
+
     
     
     
@@ -165,3 +176,5 @@ class alarmTVC: UITableViewController, AddAlarmProtocol {
     
 
 }
+
+
