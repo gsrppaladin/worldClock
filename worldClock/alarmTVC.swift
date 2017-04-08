@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class alarmTVC: UITableViewController, AddAlarmProtocol, UpdateSwitchValueProtocol {
 
@@ -25,7 +26,7 @@ class alarmTVC: UITableViewController, AddAlarmProtocol, UpdateSwitchValueProtoc
         
         //register new notifcation here.
         //whenever adding a new alarm we are register the notifcation aswell. so that we some sound can be played when that alarm goes off.
-        
+        registerNewNotification(time: alarmTime)
         
     }
     
@@ -34,6 +35,40 @@ class alarmTVC: UITableViewController, AddAlarmProtocol, UpdateSwitchValueProtoc
         alarmArray[index] = existingAlarm
         tableView.reloadData()
     }
+    
+    func registerNewNotification(time: Date) {
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Alarm"
+        content.subtitle = "Time Notification"
+        content.body = "It is time!"
+        content.sound = UNNotificationSound.default()
+        
+        var interval = time.timeIntervalSinceNow
+        if interval < 0 {
+            let tomorrow = time.addingTimeInterval(24*60*60)
+            interval = tomorrow.timeIntervalSinceNow
+        }
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        
+        let requestIdentifier = "sampleRequest"
+        
+        let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //with the protocol updateAlarmSwitchValueProtocol it will give an error unless this function is implemented.
     func updateAlarmSwitch(at: Int, value: Bool) {
