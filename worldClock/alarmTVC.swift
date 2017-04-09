@@ -15,8 +15,6 @@ class alarmTVC: UITableViewController, AddAlarmProtocol, UpdateSwitchValueProtoc
     
     var alarmArray = [alarmObject]()
     
-    
-    
     //AddAlarmProtocol will cause an error, if you dont conform to the delegate, which are the two functions below.
     //with the help of these two functions, we can construct a new alarm object, and add it to the alarmArray, then can say tableView reload data.
     func addAlarm(alarmTime: Date, switchValue: Bool) {
@@ -195,20 +193,6 @@ class alarmTVC: UITableViewController, AddAlarmProtocol, UpdateSwitchValueProtoc
         }
         
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 }
 
