@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class timerVC: UIViewController {
 
@@ -68,6 +69,9 @@ class timerVC: UIViewController {
             canPause = true
             
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateLabel), userInfo: nil, repeats: true)
+            
+            setupNotification()
+            
         } else {
             //this means that if startTimer is false.
             
@@ -80,7 +84,7 @@ class timerVC: UIViewController {
             startTimer = true
             canPause = false
             timer.invalidate() //this stops timer
-            
+            removeNotification()
             
         }
         
@@ -94,12 +98,16 @@ class timerVC: UIViewController {
             //already paused, can't pause again. 
             pauseBtn.setImage(UIImage(named: "timer_resume"), for: .normal)
             
+            removeNotification()
+            
         } else {
             
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateLabel), userInfo: nil, repeats: true)
             canPause = true
             pauseBtn.setImage(UIImage(named: "timer_pause"), for: .normal)
         }
+        
+        setupNotification()
         
     }
     
@@ -137,10 +145,32 @@ class timerVC: UIViewController {
     }
     
     
+    func setupNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Timer"
+        content.subtitle = "Notification"
+        content.body = "Timer is Finished"
+        content.sound = UNNotificationSound.default()
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds), repeats: false)
+        
+        let requestIdentifier = "timerRequest"
+        
+        let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        
+    }
     
     
+    func removeNotification() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timerRequest"])
     
-    
-    
+
+    }
+
+
+
 
 }
