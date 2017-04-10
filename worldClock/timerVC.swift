@@ -88,17 +88,52 @@ class timerVC: UIViewController {
     
     
     @IBAction func pausePressed(_ sender: UIButton) {
-        
+        if canPause {
+            timer.invalidate()
+            canPause = false
+            //already paused, can't pause again. 
+            pauseBtn.setImage(UIImage(named: "timer_resume"), for: .normal)
+            
+        } else {
+            
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateLabel), userInfo: nil, repeats: true)
+            canPause = true
+            pauseBtn.setImage(UIImage(named: "timer_pause"), for: .normal)
+        }
         
     }
     
     func updateLabel() {
         
+        //need to eventually stop timer
+        
+        if seconds <= 0 {
+            timer.invalidate()
+            return
+        }
+        
         seconds -= 1
-        
         print(seconds)
+        //need to grab the seconds and get hours and minutes from them, since the timer makes seconds. 
+        //remember that you need to use remainder "%".
         
         
+        let displayHours = seconds / 3600
+        let remainingSeconds = seconds % 3600
+        
+        let displayMinutes = remainingSeconds / 60
+        let displaySeconds = remainingSeconds % 60
+        
+        
+        
+        let hoursString = displayHours > 9 ? "\(displayHours)" : "0\(displayHours)"
+        let minutesString = displayMinutes > 9 ? "\(displayMinutes)" : "0\(displayMinutes)"
+        let secondsString = displaySeconds > 9 ? "\(displaySeconds)" : "0\(displaySeconds)"
+        
+        displayLbl.text = "\(hoursString):\(minutesString):\(secondsString)"
+        
+    
+    
     }
     
     
