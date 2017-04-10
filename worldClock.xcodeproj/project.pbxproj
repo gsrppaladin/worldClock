@@ -19,6 +19,7 @@
 		FE7768241E91A9BC00157A21 /* addAlarmTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7768231E91A9BC00157A21 /* addAlarmTVCell.swift */; };
 		FE7768261E91ADB200157A21 /* helperClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7768251E91ADB200157A21 /* helperClass.swift */; };
 		FE7DB2701E9AD25200D8D513 /* stopWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7DB26F1E9AD25200D8D513 /* stopWatchVC.swift */; };
+		FE7DB2731E9B07D600D8D513 /* timerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7DB2721E9B07D600D8D513 /* timerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		FE7768231E91A9BC00157A21 /* addAlarmTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addAlarmTVCell.swift; sourceTree = "<group>"; };
 		FE7768251E91ADB200157A21 /* helperClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helperClass.swift; sourceTree = "<group>"; };
 		FE7DB26F1E9AD25200D8D513 /* stopWatchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stopWatchVC.swift; sourceTree = "<group>"; };
+		FE7DB2721E9B07D600D8D513 /* timerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		FE37B3891E7F50D300BB0381 /* worldClock */ = {
 			isa = PBXGroup;
 			children = (
+				FE7DB2711E9B03B900D8D513 /* TImer */,
 				FE7DB26E1E9AD22200D8D513 /* StopWatch */,
 				FE77681E1E91A94C00157A21 /* Alarm */,
 				FE37B39E1E7F572D00BB0381 /* World Clock */,
@@ -107,6 +110,14 @@
 				FE7DB26F1E9AD25200D8D513 /* stopWatchVC.swift */,
 			);
 			name = StopWatch;
+			sourceTree = "<group>";
+		};
+		FE7DB2711E9B03B900D8D513 /* TImer */ = {
+			isa = PBXGroup;
+			children = (
+				FE7DB2721E9B07D600D8D513 /* timerVC.swift */,
+			);
+			name = TImer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 			files = (
 				FE7768221E91A9A100157A21 /* addAlarmVC.swift in Sources */,
 				FE7DB2701E9AD25200D8D513 /* stopWatchVC.swift in Sources */,
+				FE7DB2731E9B07D600D8D513 /* timerVC.swift in Sources */,
 				FE37B3A21E7F579000BB0381 /* TimeZonesVC.swift in Sources */,
 				FE7768261E91ADB200157A21 /* helperClass.swift in Sources */,
 				FE37B3A01E7F575400BB0381 /* WorldClockVC.swift in Sources */,
