@@ -8,7 +8,7 @@
 
 import UIKit
 
-class stopWatchVC: UIViewController {
+class stopWatchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
     @IBOutlet var stopWatchLbl: UILabel!
@@ -34,11 +34,16 @@ class stopWatchVC: UIViewController {
     var startStopWatch = true
     
     
+    var laps = [String]()
+    //this bool is used to tell that it can or cannot make a lap appear in the tableView.
+    var addLap = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         stopWatchLbl.text = "00:00:00"
-        
+        lapsTableView.delegate = self
+        lapsTableView.dataSource = self
         
     }
 
@@ -93,7 +98,7 @@ class stopWatchVC: UIViewController {
             
             startBtn.setImage(UIImage(named: "stop"), for: .normal)
             
-            
+            addLap = true
             lapBtn.setImage(UIImage(named: "lap"), for: .normal)
         } else {
             
@@ -103,6 +108,7 @@ class stopWatchVC: UIViewController {
             startBtn.setImage(UIImage(named: "start"), for: .normal)
             lapBtn.setImage(UIImage(named: "reset"), for: .normal)
             
+            addLap = false
         }
 
     }
@@ -111,9 +117,51 @@ class stopWatchVC: UIViewController {
     
     @IBAction func lapPressed(_ sender: UIButton) {
         
+        //dont forget that if it isnt declared, it becomes automatically true in swift.  this statement means if addLap is true {}.
+        
+        if addLap {
+            //the other elements will be pushed down, meaning that the most recent one will appear at the top of the tableView. 
+            //this statement is basically saying that for the array laps, insert the stopWatchString, which holds the timer at the 0 index.
+            laps.insert(stopWatchString, at: 0)
+            lapsTableView.reloadData()
+            
+        } else {
+            //if addLap is false, then that means that we are at the reset part. 
+            //we should be able to reset our stopwatch, because addLap should be equal to false. 
+            
+            //we need to reset everything in the UI so that it can be run again.
+            lapBtn.setImage(UIImage(named: "lap"), for: .normal)
+            laps.removeAll()
+            lapsTableView.reloadData()
+            fractions = 0
+            seconds = 0
+            minutes = 0
+            
+            stopWatchString = "00:00:00"
+            stopWatchLbl.text = stopWatchString
+        }
         
     }
     
+    //Mark: TableView Methods
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return laps.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "Cell")
+        
+         cell.textLabel?.text = "Lap \(laps.count - indexPath.row)"
+        cell.detailTextLabel?.text = "\(laps[indexPath.row])"
+        
+        return cell
+    }
     
 
     
